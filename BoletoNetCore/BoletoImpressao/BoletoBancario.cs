@@ -837,7 +837,7 @@ namespace BoletoNetCore
             var base64Barra = Convert.ToBase64String(new BinaryReader(streamBarra).ReadBytes((int)streamBarra.Length));
             var fnBarra = string.Format("data:image/jpg;base64,{0}", base64Barra);
 
-            var cb = new BarCode2of5i(Boleto.CodigoBarra.CodigoDeBarras, 1, 50, Boleto.CodigoBarra.CodigoDeBarras.Length);
+            var cb = new BarCode2of5i(Boleto.CodigoBarra.CodigoDeBarras, 1, 70, Boleto.CodigoBarra.CodigoDeBarras.Length);
             var base64CodigoBarras = Convert.ToBase64String(cb.ToByte());
             var fnCodigoBarras = string.Format("data:image/gif;base64,{0}", base64CodigoBarras);
 
