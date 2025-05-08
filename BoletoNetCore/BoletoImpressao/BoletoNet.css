@@ -20,13 +20,17 @@ img {
 	border: 0;
 }
 
+/* fonte titulos boleto*/
 .cp {
-    font: bold 10px arial;
-    color: #000000;
+	font: bold 11px arial;
+	letter-spacing: 0.1em;
+	word-spacing: -0.2em;
+	color: #000000;
 }
 
+/* fonte linha digitavel*/
 .ti {
-	font: 9px arial, helvetica, sans-serif;
+	font: 10px arial, helvetica, sans-serif;
 }
 
 .ld {
@@ -80,21 +84,29 @@ img {
 	vertical-align: bottom;
 }
 
+/* texto titulo celulas */
 .ct td, .cp td {
-    padding-left: 3px;
-    border-left: solid 1px #000;
-    padding-right: 3px;
-    border-right: solid 1px #000;
+	padding-left: 3px;
+	border-left: solid 1px #000;
+	padding-right: 3px;
+	border-right: solid 1px #000;
+/*	letter-spacing: 0.2em;*/
+/*	word-spacing: -0.2em;*/
 }
 
+/* fonte complementos */
 .cpN {
-    font: bold 10px arial;
-    color: #000000;
+	font: bold 11px arial;
+	letter-spacing: 0.1em;
+	word-spacing: -0.2em;
+	color: #000000;
 }
 
+/* fonte instruções */
 .ctN {
-    font: 9px "arial narrow";
-    color: #000000;
+	font: 9px "arial narrow";
+	letter-spacing: 0.2em;
+	color: #000000;
 }
 
 .pL0 {
@@ -103,6 +115,7 @@ img {
 
 .pL6 {
 	padding-left: 6px;
+	letter-spacing: 0.2em;
 }
 
 .pL10 {
@@ -163,10 +176,12 @@ img {
 
 .h13 {
 	height: 13px;
+	letter-spacing: 0.2em;
 }
 
 .h12 {
 	height: 12px;
+/*	letter-spacing: 0.2em;*/
 }
 
 .h13 td {
@@ -289,8 +304,10 @@ img {
 	width: 192px;
 }
 
+/* texto autenicação mecanica */
 .w250 {
 	width: 250px;
+	letter-spacing: 0.2em;
 }
 
 .w298 {

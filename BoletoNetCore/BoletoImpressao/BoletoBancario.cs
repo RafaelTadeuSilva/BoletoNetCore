@@ -444,7 +444,7 @@ namespace BoletoNetCore
             //Adicionado Largura e Altura sobre a Imagem do Codigo de Barras
             //Alguns Bancos não estavam conseguindo ler o Codigo de Barras
             //Alterado por Rafael Tadeu 08/05/2025
-            html.Append(MontaHtml(srcLogo, srcBarra, "<img src=\"" + srcCodigoBarra + "\" alt=\"Código de Barras\" width=\"600\" height=\"100\"/>", pixStr, pixTamanhoImagem));
+            html.Append(MontaHtml(srcLogo, srcBarra, "<img src=\"" + srcCodigoBarra + "\" alt=\"Código de Barras\" width=\"600\" height=\"70\"/>", pixStr, pixTamanhoImagem));
             HtmlOfflineFooter(html);
             return html;
         }
