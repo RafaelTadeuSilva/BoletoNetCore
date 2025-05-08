@@ -441,7 +441,10 @@ namespace BoletoNetCore
             {
                 html.Append(textoNoComecoDoEmail);
             }
-            html.Append(MontaHtml(srcLogo, srcBarra, "<img src=\"" + srcCodigoBarra + "\" alt=\"Código de Barras\" />", pixStr, pixTamanhoImagem));
+            //Adicionado Largura e Altura sobre a Imagem do Codigo de Barras
+            //Alguns Bancos não estavam conseguindo ler o Codigo de Barras
+            //Alterado por Rafael Tadeu 08/05/2025
+            html.Append(MontaHtml(srcLogo, srcBarra, "<img src=\"" + srcCodigoBarra + "\" alt=\"Código de Barras\" width=\"600\" height=\"100\"/>", pixStr, pixTamanhoImagem));
             HtmlOfflineFooter(html);
             return html;
         }
@@ -837,7 +840,7 @@ namespace BoletoNetCore
             var base64Barra = Convert.ToBase64String(new BinaryReader(streamBarra).ReadBytes((int)streamBarra.Length));
             var fnBarra = string.Format("data:image/jpg;base64,{0}", base64Barra);
 
-            var cb = new BarCode2of5i(Boleto.CodigoBarra.CodigoDeBarras, 1, 70, Boleto.CodigoBarra.CodigoDeBarras.Length);
+            var cb = new BarCode2of5i(Boleto.CodigoBarra.CodigoDeBarras, 1, 50, Boleto.CodigoBarra.CodigoDeBarras.Length);
             var base64CodigoBarras = Convert.ToBase64String(cb.ToByte());
             var fnCodigoBarras = string.Format("data:image/gif;base64,{0}", base64CodigoBarras);
 

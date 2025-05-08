@@ -68,53 +68,71 @@ namespace BoletoNetCore
         public static void FormataMensagemInstrucao(Boleto boleto)
         {
             boleto.MensagemInstrucoesCaixaFormatado = "";
+            //Foi alterado as Impressões das Instruções
+            //Alterado por José Roberto 08/05/2025
+            if (boleto.ImprimirMensagemInstrucao == true)
+            {
+                //JUROS
+                if (boleto.ValorJurosDia > 0)
+                {
+                    boleto.MensagemInstrucoesCaixaFormatado += $"Cobrar juros de R$ {boleto.ValorJurosDia.ToString("N2")} por dia de atraso após {boleto.DataJuros.ToString("dd/MM/yyyy")}{Environment.NewLine}";
+                }
+                else if (boleto.PercentualJurosDia > 0)
+                {
+                    boleto.MensagemInstrucoesCaixaFormatado += $"Cobrar juros de {boleto.PercentualJurosDia.ToString("N2")}% por dia de atraso após {boleto.DataJuros.ToString("dd/MM/yyyy")}{Environment.NewLine}";
+                }
 
-            //JUROS
-            if (boleto.ImprimirValoresAuxiliares == true && boleto.ValorJurosDia > 0)
-            {
-                boleto.MensagemInstrucoesCaixaFormatado += $"Cobrar juros de R$ {boleto.ValorJurosDia.ToString("N2")} por dia de atraso APÓS {boleto.DataJuros.ToString("dd/MM/yyyy")}{Environment.NewLine}";
-            }
-            else if (boleto.ImprimirValoresAuxiliares == true && boleto.PercentualJurosDia > 0)
-            {
-                boleto.MensagemInstrucoesCaixaFormatado += $"Cobrar juros de {boleto.PercentualJurosDia.ToString("N2")}% por dia de atraso APÓS {boleto.DataJuros.ToString("dd/MM/yyyy")}{Environment.NewLine}";
-            }
+                //MULTA
+                if (boleto.ValorMulta > 0)
+                {
+                    boleto.MensagemInstrucoesCaixaFormatado += $"Cobrar multa de R$ {boleto.ValorMulta.ToString("N2")} a partir de {boleto.DataMulta.ToString("dd/MM/yyyy")}{Environment.NewLine}";
+                }
+                else if (boleto.PercentualMulta > 0)
+                {
+                    boleto.MensagemInstrucoesCaixaFormatado += $"Cobrar multa de {boleto.PercentualMulta.ToString("N2")}% a partir de {boleto.DataMulta.ToString("dd/MM/yyyy")}{Environment.NewLine}";
+                }
 
-            //MULTA
-            if (boleto.ImprimirValoresAuxiliares == true && boleto.ValorMulta > 0)
-            {
-                boleto.MensagemInstrucoesCaixaFormatado += $"Cobrar multa de R$ {boleto.ValorMulta.ToString("N2")} a partir DE {boleto.DataMulta.ToString("dd/MM/yyyy")}{Environment.NewLine}";
-            }
-            else if (boleto.ImprimirValoresAuxiliares == true && boleto.PercentualMulta > 0)
-            {
-                boleto.MensagemInstrucoesCaixaFormatado += $"Cobrar multa de {boleto.PercentualMulta.ToString("N2")}% a partir DE {boleto.DataMulta.ToString("dd/MM/yyyy")}{Environment.NewLine}";
-            }
+                //DESCONTO
+                if (boleto.ValorDesconto > 0)
+                {
+                    boleto.MensagemInstrucoesCaixaFormatado += $"Conceder desconto de R$ {boleto.ValorDesconto.ToString("N2")} até {boleto.DataDesconto.ToString("dd/MM/yyyy")}{Environment.NewLine}";
+                }
+                //DESCONTO 2
+                if (boleto.ValorDesconto2 > 0)
+                {
+                    boleto.MensagemInstrucoesCaixaFormatado += $"Conceder desconto de R$ {boleto.ValorDesconto2.ToString("N2")} até {boleto.DataDesconto2.ToString("dd/MM/yyyy")}{Environment.NewLine}";
+                }
+                //DESCONTO 3
+                if (boleto.ValorDesconto3 > 0)
+                {
+                    boleto.MensagemInstrucoesCaixaFormatado += $"Conceder desconto de R$ {boleto.ValorDesconto3.ToString("N2")} até {boleto.DataDesconto3.ToString("dd/MM/yyyy")}{Environment.NewLine}";
+                }
 
-            //DESCONTO
-            if (boleto.ImprimirValoresAuxiliares == true && boleto.ValorDesconto > 0)
-            {
-                boleto.MensagemInstrucoesCaixaFormatado += $"Conceder desconto de R$ {boleto.ValorDesconto.ToString("N2")} ATÉ {boleto.DataDesconto.ToString("dd/MM/yyyy")}{Environment.NewLine}";
-            }
-            //DESCONTO 2
-            if (boleto.ImprimirValoresAuxiliares == true && boleto.ValorDesconto2 > 0)
-            {
-                boleto.MensagemInstrucoesCaixaFormatado += $"Conceder desconto de R$ {boleto.ValorDesconto2.ToString("N2")} ATÉ {boleto.DataDesconto2.ToString("dd/MM/yyyy")}{Environment.NewLine}";
-            }
-            //DESCONTO 3
-            if (boleto.ImprimirValoresAuxiliares == true && boleto.ValorDesconto3 > 0)
-            {
-                boleto.MensagemInstrucoesCaixaFormatado += $"Conceder desconto de R$ {boleto.ValorDesconto3.ToString("N2")} ATÉ {boleto.DataDesconto3.ToString("dd/MM/yyyy")}{Environment.NewLine}";
-            }
+                //PROTESTO
+                //Aqui, imprime a instrução do protesto
+                //Protestar Dias Uteis
+                //Alterado por José Roberto
+                if (boleto.CodigoProtesto == TipoCodigoProtesto.ProtestarDiasUteis && boleto.DiasProtesto > 0)
+                {
+                    boleto.MensagemInstrucoesCaixaFormatado += $"Protestar após {boleto.DiasProtesto} dias úteis{Environment.NewLine}";
+                }
 
-            //Aqui, define se a mensagem de instrução manual deve ser impressa, 
-            //na minha visão se o usuário passou uma instrução, esta deveria ser impressa sempre.
-            //Entretanto, para manter o comportamento atual sem quebrar nenhuma aplicação, foi criado um parâmetro com valor "false"
-            //https://github.com/BoletoNet/BoletoNetCore/pull/91
-            if (boleto.ImprimirMensagemInstrucao && boleto.MensagemInstrucoesCaixa?.Length > 0)
-            {
-                boleto.MensagemInstrucoesCaixaFormatado += Environment.NewLine;
-                boleto.MensagemInstrucoesCaixaFormatado += boleto.MensagemInstrucoesCaixa;
-            }
+                //Protestar Dias Corridos
+                if (boleto.CodigoProtesto == TipoCodigoProtesto.ProtestarDiasCorridos && boleto.DiasProtesto > 0)
+                {
+                    boleto.MensagemInstrucoesCaixaFormatado += $"Protestar após {boleto.DiasProtesto} dias corridos{Environment.NewLine}";
+                }
 
+                //Aqui, define se a mensagem de instrução manual deve ser impressa, 
+                //na minha visão se o usuário passou uma instrução, esta deveria ser impressa sempre.
+                //Entretanto, para manter o comportamento atual sem quebrar nenhuma aplicação, foi criado um parâmetro com valor "false"
+                //https://github.com/BoletoNet/BoletoNetCore/pull/91
+                if (boleto.MensagemInstrucoesCaixa?.Length > 0)
+                {
+                    boleto.MensagemInstrucoesCaixaFormatado += Environment.NewLine;
+                    boleto.MensagemInstrucoesCaixaFormatado += boleto.MensagemInstrucoesCaixa;
+                }
+            }
         }
 
         /// <summary>
